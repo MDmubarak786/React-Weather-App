@@ -1,42 +1,67 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
+// api === 5f9b5173468219b4506afb6943fcc57b
 export default function Home() {
   const [inputvalue, setinputvalue] = useState("");
+  const [data, setdata] = useState(null);
   const eventHandler = (e) => {
     e.preventDefault();
-
-    console.log(inputvalue);
-    setinputvalue("");
+    fetchapi();
   };
   const eventDiabled = inputvalue.length > 0 ? false : true;
-
+  async function fetchapi() {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${inputvalue}&appid=5f9b5173468219b4506afb6943fcc57b`
+    );
+    await response
+      .json()
+      .then((res) => setdata(res))
+      .catch((res) => console.log(res));
+    setinputvalue("");
+  }
   return (
     <div>
       <Heading>
         <h1>Weather App</h1>
       </Heading>
       <Input
+        placeholder="Enter City Name"
         type="text"
         value={inputvalue}
         onKeyPress={(event) => {
           if (event.key === "Enter") {
-            console.log(inputvalue);
-            setinputvalue("");
+            fetchapi();
           }
         }}
         onChange={(e) => setinputvalue(e.target.value)}
       />
       <Button onClick={eventHandler} disabled={eventDiabled}>
-        <h2>Submit</h2>{" "}
-        <h2 style={{ paddingTop: "5px" }}>
-          {eventDiabled == true ? (
-            <p>Gimme Place Name</p>
-          ) : (
-            <p>Details fetching...</p>
-          )}
-        </h2>
+        <h2>Submit</h2>
       </Button>
+      <Mention style={{ paddingTop: "5px" }}>
+        {eventDiabled == true ? (
+          <p>Gimme Place Name</p>
+        ) : (
+          <p>Details fetching...</p>
+        )}
+      </Mention>
+      <div>
+        <Wrapper>
+          {data && (
+            <Content>
+              <h1>{data.name}</h1>
+              <h2>{data.sys.country}</h2>
+              <h2>{data.main.temp}</h2>
+              <h3>
+                {data.weather[0].main} : {data.weather[0].description}
+              </h3>
+              <h3>Wind Speed : {data.wind.speed}</h3>
+            </Content>
+          )}
+        </Wrapper>
+      </div>
     </div>
   );
 }
@@ -70,7 +95,6 @@ const Input = styled.input`
   height: 100px;
   width: 30%;
   text-align: center;
-  
 `;
 const Button = styled.button`
   display: block;
@@ -89,4 +113,23 @@ const Button = styled.button`
     color: darkred;
     background-color: lightcoral;
   }
+`;
+const Mention = styled.h2`
+  color: blueviolet;
+  text-align: center;
+  margin-left: 7%;
+`;
+const Content = styled.div`
+  background-color: blanchedalmond;
+  padding: 20px;
+  text-align: center;
+  height: 350px;
+  width: 850px;
+  border-radius: 20px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
