@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 // api === 5f9b5173468219b4506afb6943fcc57b
 export default function Home() {
@@ -93,23 +92,36 @@ const Input = styled.input`
   height: 100px;
   margin: 0 auto;
   text-align: center;
+  border: none;
+  border-radius: 15px;
+  &:focus {
+    border: 1px solid lightcoral;
+  }
 `;
 const Button = styled.button`
   outline: none;
   color: blueviolet;
-  background-color: black;
+  background-color: #ffffff;
   height: 60px;
   width: 220px;
   border-radius: 15px;
   border: none;
   margin: 10px auto;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.16), 0 8px 8px rgba(0, 0, 0, 0.2);
   &:active {
     color: darkred;
     background-color: lightcoral;
   }
+  &:hover {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
+      0 4px 4px rgba(0, 0, 0, 0.16), 0 8px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1, 1.1);
+  }
 `;
 const Mention = styled.h2`
-  color: blueviolet;
+  color: linen;
   margin: 0 auto;
 `;
 const Content = styled.div`
