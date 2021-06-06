@@ -18,6 +18,7 @@ export default function Home() {
       .json()
       .then((res) => setdata(res))
       .catch((res) => console.log(res));
+    // console.log(data.cod === 200);
     setinputvalue("");
   }
   return (
@@ -48,7 +49,7 @@ export default function Home() {
           )}
         </Mention>
         <div>
-          {data && (
+          {data && data.cod === 200 && (
             <Content>
               <h1>{data.name}</h1>
               <h2>{data.sys.country}</h2>
@@ -57,6 +58,13 @@ export default function Home() {
                 {data.weather[0].main} : {data.weather[0].description}
               </h3>
               <h3>Wind Speed : {data.wind.speed}</h3>
+            </Content>
+          )}
+          {data && data.cod != 200 && (
+            <Content>
+              <h1>Give The Correct City Name</h1>
+              <h2>or</h2>
+              <h1>Check the Spell</h1>
             </Content>
           )}
         </div>
