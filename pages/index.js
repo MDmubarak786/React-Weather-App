@@ -18,7 +18,8 @@ export default function Home() {
       .json()
       .then((res) => setdata(res))
       .catch((res) => console.log(res));
-    // console.log(data.cod === 200);
+
+    console.log(data);
     setinputvalue("");
   }
   return (
@@ -51,13 +52,19 @@ export default function Home() {
         <div>
           {data && data.cod === 200 && (
             <Content>
-              <h1>{data.name}</h1>
-              <h2>{data.sys.country}</h2>
+              <h1>Weather in {data.name}</h1>
+              {/* <h2>{data.sys.country}</h2> */}
               <h2>{data.main.temp}</h2>
-              <h3>
-                {data.weather[0].main} : {data.weather[0].description}
-              </h3>
-              <h3>Wind Speed : {data.wind.speed}</h3>
+              {
+                <img
+                  src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
+                  alt="image-api"
+                  height="60px"
+                  width="60px"
+                />
+              }
+              <h5>{data.weather[0].description}</h5>
+              <h5>Wind Speed : {data.wind.speed}</h5>
             </Content>
           )}
           {data && data.cod != 200 && (
