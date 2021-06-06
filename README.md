@@ -1,6 +1,10 @@
-Next JS
-React JS
-Styled Components
-API Open Weather
-Conditional Funtion (Ternary Operator)
 
+```
+
+🟢 Next JS
+🟢 React JS
+🟢 Styled Components
+🟢 API Open Weather
+🟢 Conditional Funtion (Ternary Operator)
+
+```
