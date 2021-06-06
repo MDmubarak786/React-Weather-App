@@ -54,17 +54,20 @@ export default function Home() {
             <Content>
               <h1>Weather in {data.name}</h1>
               {/* <h2>{data.sys.country}</h2> */}
-              <h2>{data.main.temp}</h2>
+              <h2>{(data.main.temp - 273.5).toFixed(2)} °C</h2>
               {
                 <img
                   src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
                   alt="image-api"
-                  height="60px"
-                  width="60px"
+                  height="70px"
+                  width="70px"
                 />
               }
-              <h5>{data.weather[0].description}</h5>
-              <h5>Wind Speed : {data.wind.speed}</h5>
+              <h5 style={{ textTransform: "capitalize" }}>
+                {data.weather[0].description}
+              </h5>
+              <h5>Wind Speed : {data.wind.speed} km/h</h5>
+              <h5>Humidity : {data.main.humidity}%</h5>
             </Content>
           )}
           {data && data.cod != 200 && (
@@ -141,9 +144,9 @@ const Mention = styled.h2`
 `;
 const Content = styled.div`
   background-color: blanchedalmond;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  height: 280px;
+  height: 350px;
   width: 650px;
   border-radius: 20px;
   margin: 0 auto;
