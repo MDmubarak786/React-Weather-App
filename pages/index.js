@@ -23,32 +23,32 @@ export default function Home() {
   }
   return (
     <div>
-      <Heading>
-        <h1>Weather App</h1>
-      </Heading>
-      <Input
-        placeholder="Enter City Name"
-        type="text"
-        value={inputvalue}
-        onKeyPress={(event) => {
-          if (event.key === "Enter") {
-            fetchapi();
-          }
-        }}
-        onChange={(e) => setinputvalue(e.target.value)}
-      />
-      <Button onClick={eventHandler} disabled={eventDiabled}>
-        <h2>Submit</h2>
-      </Button>
-      <Mention style={{ paddingTop: "5px" }}>
-        {eventDiabled == true ? (
-          <p>Gimme Place Name</p>
-        ) : (
-          <p>Details fetching...</p>
-        )}
-      </Mention>
-      <div>
-        <Wrapper>
+      <Mainwrapper>
+        <Heading>
+          <h1>Weather App</h1>
+        </Heading>
+        <Input
+          placeholder="Enter City Name"
+          type="text"
+          value={inputvalue}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              fetchapi();
+            }
+          }}
+          onChange={(e) => setinputvalue(e.target.value)}
+        />
+        <Button onClick={eventHandler} disabled={eventDiabled}>
+          <h2>Submit</h2>
+        </Button>
+        <Mention style={{ paddingTop: "5px" }}>
+          {eventDiabled == true ? (
+            <p>Gimme Place Name</p>
+          ) : (
+            <p>Details fetching...</p>
+          )}
+        </Mention>
+        <div>
           {data && (
             <Content>
               <h1>{data.name}</h1>
@@ -60,55 +60,49 @@ export default function Home() {
               <h3>Wind Speed : {data.wind.speed}</h3>
             </Content>
           )}
-        </Wrapper>
-      </div>
+        </div>
+      </Mainwrapper>
     </div>
   );
 }
 
+const Mainwrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const Heading = styled.section`
   color: blueviolet;
   background-color: black;
-  text-align: center;
   height: 100px;
   width: 250px;
   border-radius: 20px;
   display: flex;
-  align-content: center;
   justify-content: center;
   align-items: center;
-  margin-left: 45%;
-  margin-top: 10px;
+  margin: 10px auto;
   &:hover {
     color: white;
     background-color: blueviolet;
   }
 `;
 const Input = styled.input`
-  display: block;
-  margin-left: 38%;
-  margin-top: 10px;
   outline: none;
   color: blueviolet;
   background-color: black;
   font-size: 50px;
   height: 100px;
-  width: 30%;
+  margin: 0 auto;
   text-align: center;
 `;
 const Button = styled.button`
-  display: block;
-  margin-left: 46%;
-  margin-top: 10px;
   outline: none;
   color: blueviolet;
   background-color: black;
   height: 60px;
   width: 220px;
-  text-align: center;
   border-radius: 15px;
-  outline: none;
   border: none;
+  margin: 10px auto;
   &:active {
     color: darkred;
     background-color: lightcoral;
@@ -116,20 +110,14 @@ const Button = styled.button`
 `;
 const Mention = styled.h2`
   color: blueviolet;
-  text-align: center;
-  margin-left: 7%;
+  margin: 0 auto;
 `;
 const Content = styled.div`
   background-color: blanchedalmond;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
-  height: 350px;
-  width: 850px;
+  height: 280px;
+  width: 650px;
   border-radius: 20px;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0 auto;
 `;
